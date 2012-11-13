@@ -1,0 +1,20 @@
+login: &login
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  username: username
+  password: password
+  host: localhost
+  port: 5432
+
+development:
+  <<: *login
+  database: dbname_development
+
+test:
+  <<: *login
+  database: dbname_test
+
+production:
+  <<: *login
+  dtabase: dbname_prodaction

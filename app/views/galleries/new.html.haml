@@ -1,0 +1,5 @@
+%h1 Create new gallery
+= form_for Gallery.new do |f|
+  = f.text_field :name
+
+  %p= f.submit "Создать галерею"
