@@ -16,6 +16,7 @@ class GalleriesController < ApplicationController
 
   # /Galleries/new GET
   def new
+    @gallery = Gallery.new
 
   end
 
@@ -25,8 +26,14 @@ class GalleriesController < ApplicationController
 
   # /Galleries POST
   def create
-    # @gallery = Gallery.create(name: params[:name])
-    # render text: "#{@gallery.id}: #{@gallery.name} (#{!@gallery.new_record?})"
+    @gallery = Gallery.create(params[:gallery])
+    if @gallery.errors.empty?
+      redirect_to gallery_path(@gallery)
+    else
+      render "new"
+    end
+
+    #-render text: params.inspect
   end
 
   # /Galleries/1 PUT
