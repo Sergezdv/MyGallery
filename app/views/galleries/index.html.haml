@@ -1,2 +1,5 @@
 - @galleries.each do |i|
   %p= link_to i.name, gallery_path(i)
+
+- @pictures.each do |i|
+  =image_tag( i.image)

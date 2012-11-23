@@ -1,6 +1,15 @@
 %h1 Create new gallery
-= form_for @gallery do |f|
+= form_for @gallery, :html => { :multipart => true } do |f|
+  = image_tag(@gallery.image_url) if @gallery.image?
   %p Имя:
-  = f.text_field :name
+  %br
+    = f.text_field :name
+  %br
+    = f.file_field :image
+  %br
 
-  %p= f.submit "Создать галерею"
+
+
+  %p= f.submit "Create gallery"
+
+

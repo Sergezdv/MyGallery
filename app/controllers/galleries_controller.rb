@@ -3,12 +3,15 @@ class GalleriesController < ApplicationController
   def index
     @galleries = Gallery.all
     # render "galleries/index" #по умолчанию рендерит на соотв.въюху, можн. не указывать
-
+    @pictures = Picture.all
   end
 
   # /Galleries/1 GET
   def show
+    @picture = Picture(params[:id])
+
     unless @gallery = Gallery.where(id: params[:id]).first
+
 
       render text: "Page not found", status:404
     end

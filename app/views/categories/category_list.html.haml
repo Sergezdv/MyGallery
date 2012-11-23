@@ -1,0 +1,4 @@
+category_list
+%h1 #{@category.name}
+-@pictures.each do |pict|
+  =link_to(image_tag(pict.image.small.url),category_show_image_path(pict))
