@@ -1,0 +1,24 @@
+%p
+  = link_to catlist_path(:id => @picture.category.id) do
+    %div{:style => "float:left;margin-right: 30px"}
+      %p= "Comments: #{@picture.comments.count.to_i}"
+      %p= image_tag @picture.image.thumb
+      %br
+%p
+  = link_to image_tag(@picture.image.url)#, :onclick => "sendTracking(this, '#{current_user.id}');"
+  %p
+  - @picture.comments.each do |comment|
+    .well
+      %code #{comment.user.email} said:
+      = comment.body
+  = form_for :comment, :url => comments_path do |f|
+    = f.text_area :body
+    = f.hidden_field :picture_id, :value => @picture.id
+    %br
+    = f.submit :value => "save"
+  %p
+    = link_to 'Back', :back
+
+
+
+

@@ -43,7 +43,7 @@ gem "rmagick", "~> 2.13.1"
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+
 
 
 
