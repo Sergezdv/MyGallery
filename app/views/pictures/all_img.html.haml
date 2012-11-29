@@ -1,10 +1,10 @@
-%br
+= will_paginate @pictures
 - @pictures.each do |img|
-  = link_to picture_path(:id => img.id) do
-    %div{:style => "float:left; width:150px;height: 170px"}
-      = "Comments: #{img.comments.count.to_i}"
-      |
-      \#{"Like: #{img.likes_count.to_i}"}
-      %p
-        = image_tag img.pict(:thumb)
+  %div{:style => "float:left; width: 100px; height: 150px; padding: 5px; text-align: center; font-size: 12px"}
+    = "Comments: #{img.comments.count.to_i} "
+    %br
+    = "Like: #{img.likes_count.to_i}"
+    %br
+    = link_to picture_path(:id => img.id) do
+      = image_tag img.image.small.url
 .clear

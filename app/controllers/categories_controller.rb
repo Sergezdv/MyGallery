@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
 
   def catlist
     @category = Category.find(params[:id])
-    @pictures = Picture.find_all_by_category_id(params[:id])
+    @pictures = Picture.paginate(:page => params[:page], :per_page => 5).order('likes_count DESC').find_all_by_category_id(params[:id])
   end
 
   def rand_method

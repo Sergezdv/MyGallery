@@ -18,6 +18,7 @@ group :assets do
   gem "less-rails", "~> 2.2.6"
   gem "less-rails-bootstrap", "~> 2.2.0"
   gem "twitter-bootstrap-rails", "~> 2.1.6"
+  gem "will_paginate"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -28,7 +29,8 @@ gem 'jquery-rails'
 gem "haml-rails", "~> 0.3.5"
 gem 'kaminari'
 gem "carrierwave", "~> 0.7.1"
-gem "rmagick", "~> 2.13.1"
+gem "mini_magick"
+gem 'annotate', ">=2.5.0"
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

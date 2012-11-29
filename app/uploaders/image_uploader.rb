@@ -3,8 +3,8 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-   include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  # include CarrierWave::RMagick
+   include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -30,9 +30,51 @@ class ImageUploader < CarrierWave::Uploader::Base
      process :resize_to_limit => [200, 200]
    end
 
+   version :thumb_f do
+     process :resize_to_fill => [128, 128]
+   end
+
    version :small do
      process :resize_to_limit => [100, 100]
    end
+
+   version :with_border do
+     process :make_thumb
+   end
+
+
+
+   private
+   def make_thumb
+     resize_to_fill(128,128)
+     round_corner
+   end
+
+   #def draw_border
+   #  manipulate! do |image|
+   #    image.frame "5x5" # рамка с толщиной 5 пикселей в вертикальном и горизонтальном положениях
+   #    image
+   #  end
+   #end
+
+   # скругление углов
+   def round_corner(radius = 10)
+     round_command = ""
+     round_command << '\( +clone -alpha extract '
+     round_command << "-draw 'fill black polygon 0,0 0,#{radius} #{radius},0 fill white circle #{radius},#{radius} #{radius},0' "
+     round_command << '\( +clone -flip \) -compose Multiply -composite '
+     round_command << '\( +clone -flop \) -compose Multiply -composite \) '
+     round_command << '-alpha off -compose CopyOpacity -composite'
+     manipulate! do |image|
+       image.format 'png'
+       image.combine_options :convert do |command|
+         command << round_command
+       end
+       image
+     end
+   end
+
+
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

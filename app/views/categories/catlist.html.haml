@@ -1,5 +1,10 @@
 %h1 #{@category.name}
--@pictures.each do |pict|
-  = link_to image_tag(pict.image.thumb.url), picture_path(pict)
-
+= will_paginate @pictures
+- @pictures.each do |img|
+  %div{:style => "float:left; width: 130px; height: 150px; padding: 10px; text-align: center; font-size: 12px"}
+    = "Comments: #{img.comments.count.to_i} "
+    = " | Like: #{img.likes_count.to_i}"
+    = link_to picture_path(:id => img.id) do
+      = image_tag img.image.with_border.url
 .clear
+
