@@ -42,8 +42,27 @@
       .container
         .row
           .span9
+
             = bootstrap_flash
             = yield
+
+
+          .my_menu
+            = link_to "Categories", categories_path
+            |
+            \#{ link_to "All Pictures", all_img_path, :method => :get }
+            |
+            \#{link_to "All Comments", all_comm_path, :method => :get }
+            |
+            \#{link_to "Users' actions", event_index_path}
+
+          .flash
+            - flash.each do |type, message|
+              %div{:class => "message #{type}"}
+                %p= message
+                %p.notice= notice
+                %p.alert= alert
+
           .span3
             .well.sidebar-nav
               %h3 Sidebar
@@ -55,6 +74,15 @@
                   %li= link_to "alcohol", "/catlist?id=3"
                   %li= link_to "tits", "/catlist?id=4"
                   %li= link_to "cats", "/catlist?id=5"
+            .well.sidebar-nav
+              %h3 Users
+              %ul.nav.nav-list
+                %li.nav-header Sidebar
+                - if user_signed_in?
+                  %li= link_to "ruby", "/catlist?id=1"
+                  %li= link_to "christmas", "/catlist?id=2"
+
+
       .push
     %footer.container-fluid
       %p &copy; Company 2012

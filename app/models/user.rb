@@ -31,4 +31,16 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :likes
 
+  has_many :events, :as => :eventtable
+
+  validates :email, :presence => true, :uniqueness => true
+
+  after_create :create_use
+
+  def create_use
+    self.events.create(:eventtable_body => "created_at", :user_id => self.id)
+  end
+
+
+
 end
