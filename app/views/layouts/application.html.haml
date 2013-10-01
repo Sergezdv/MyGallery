@@ -26,6 +26,23 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
+
+            .my_menu{:class => "brand"}
+              = link_to "Categories", categories_path
+              |
+              \#{link_to "All Pictures", all_img_path, :method => :get }
+              |
+              \#{link_to "All Comments", all_comm_path, :method => :get }
+              |
+              \#{link_to "Users' actions", event_index_path}
+
+            .flash
+              - flash.each do |type, message|
+                %div{:class => "message #{type}"}
+                  %p= message
+                  %p.notice= notice
+                  %p.alert= alert
+
             = link_to "My Galery", root_path, :class => "brand"
             = link_to "All images", all_img_path, :class => "brand"
             .nav-collapse
@@ -47,21 +64,7 @@
             = yield
 
 
-          .my_menu
-            = link_to "Categories", categories_path
-            |
-            \#{ link_to "All Pictures", all_img_path, :method => :get }
-            |
-            \#{link_to "All Comments", all_comm_path, :method => :get }
-            |
-            \#{link_to "Users' actions", event_index_path}
 
-          .flash
-            - flash.each do |type, message|
-              %div{:class => "message #{type}"}
-                %p= message
-                %p.notice= notice
-                %p.alert= alert
 
           .span3
             .well.sidebar-nav
