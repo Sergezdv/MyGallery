@@ -9,4 +9,9 @@ class ApplicationController < ActionController::Base
     Event.create(:eventtable_type => "Navigation", :user_id => current_user.id, :eventtable_body => request.env["REQUEST_URI"] ) if current_user
   end
 
+  private
+
+  def person_params
+    params.require(:event).permit(:user_id)
+  end
 end
